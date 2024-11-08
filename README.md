@@ -1,15 +1,19 @@
+Here’s your updated README, reflecting the change to use `0` and `1` instead of `false` and `true` for the `is_completed` status:
+
 ```markdown
 # To-Do List API
 
-This is a Laravel application integrated with React that functions as a RESTful API to manage a to-do list. The API allows creating and listing tasks with filters.
+This is a Laravel application integrated with React that functions as a RESTful API to manage a to-do list. The API allows creating, listing, updating, and deleting tasks, with support for filtering tasks based on their completion status using `0` (incomplete) and `1` (completed).
 
 ## Requirements
 
 - PHP >= 8.0
 - Composer
-- Database (MySQL, PostgreSQL, etc.)
+- Database (MySQL)
 - Laravel
 - React
+- Apache Web Server
+- Linux (for development environment)
 
 ## Installation
 
@@ -44,7 +48,7 @@ This is a Laravel application integrated with React that functions as a RESTful 
    php artisan key:generate
    ```
 
-5. Run migrations to create database tables:
+5. Run migrations to create the database tables:
    ```bash
    php artisan migrate
    ```
@@ -65,7 +69,8 @@ This is a Laravel application integrated with React that functions as a RESTful 
   ```json
   {
       "title": "New Task",
-      "description": "Task description"
+      "description": "Task description",
+      "is_completed": 1
   }
   ```
 - **Success Response:** `201 Created`
@@ -75,7 +80,7 @@ This is a Laravel application integrated with React that functions as a RESTful 
           "id": 1,
           "title": "New Task",
           "description": "Task description",
-          "is_completed": false,
+          "is_completed": 0,
           "created_at": "2024-11-06T10:00:00.000000Z",
           "updated_at": "2024-11-06T10:00:00.000000Z"
       }
@@ -88,17 +93,17 @@ This is a Laravel application integrated with React that functions as a RESTful 
 - **Method:** `GET`
 - **Endpoint:** `/api/tasks`
 - **Filter Parameter:** `is_completed` (optional)
-  - `true` to list only completed tasks
-  - `false` to list only incomplete tasks
+  - `1` to list only completed tasks
+  - `0` to list only incomplete tasks
 
 - **Request Example Without Filter:**
   ```http
   GET /api/tasks
   ```
-  
+
 - **Request Example With Filter (Completed Tasks):**
   ```http
-  GET /api/tasks?is_completed=true
+  GET /api/tasks?is_completed=1
   ```
 
 - **Success Response:**
@@ -109,11 +114,56 @@ This is a Laravel application integrated with React that functions as a RESTful 
               "id": 1,
               "title": "Example Task",
               "description": "Task description",
-              "is_completed": true,
+              "is_completed": 1,
               "created_at": "2024-11-06T10:00:00.000000Z",
               "updated_at": "2024-11-06T10:00:00.000000Z"
           }
       ]
+  }
+  ```
+
+### 3. Update Task Status
+
+- **Description:** Updates the completion status of a task.
+- **Method:** `PATCH`
+- **Endpoint:** `/api/tasks/{id}/status`
+- **Request Example:**
+  ```json
+  {
+      "is_completed": 1
+  }
+  ```
+- **Success Response:** `200 OK`
+  ```json
+  {
+      "message": "Task updated successfully.",
+      "task": {
+          "id": 1,
+          "title": "New Task",
+          "description": "Task description",
+          "is_completed": 1,
+          "created_at": "2024-11-06T10:00:00.000000Z",
+          "updated_at": "2024-11-06T10:00:00.000000Z"
+      }
+  }
+  ```
+
+- **Error Response (if task not found):** `404 Not Found`
+  ```json
+  {
+      "message": "Task not found."
+  }
+  ```
+
+### 4. Delete Task
+
+- **Description:** Deletes a task from the list.
+- **Method:** `DELETE`
+- **Endpoint:** `/api/tasks/{id}`
+- **Success Response:** `204 No Content`
+  ```json
+  {
+      "message": "Task deleted successfully."
   }
   ```
 
@@ -122,10 +172,11 @@ This is a Laravel application integrated with React that functions as a RESTful 
 - ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) - PHP framework for web development
 - ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) - JavaScript library for building user interfaces
 - ![Composer](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=composer&logoColor=white) - Dependency manager for PHP
-- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) or ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white) - Database
+- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) - Database
 - ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) - Backend programming language
+- ![Apache](https://img.shields.io/badge/Apache-FF0000?style=for-the-badge&logo=apache&logoColor=white) - Web server
+- ![Linux](https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=white) - Development environment
 
 ## License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-```
