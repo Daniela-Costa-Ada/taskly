@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Page\PageController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GitHubController;
 
 /*
 |--------------------------------------------------------------------------

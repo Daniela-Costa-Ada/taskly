@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
@@ -28,7 +29,6 @@ class TaskController extends Controller
         return response()->json(['task' => $task], 201);
     }
 
-
     public function index(Request $request)
     {
         // Validate the 'is_completed' parameter, which is optional and should be a boolean (true/false).
@@ -57,10 +57,9 @@ class TaskController extends Controller
 
         // Return the tasks found with status 200 (OK).
         return response()->json([
-            'tasks' => $tasks
+            'tasks' => $tasks,
         ], 200);
     }
-
 
     public function updateStatus($id, Request $request)
     {
@@ -89,7 +88,6 @@ class TaskController extends Controller
         ], 500);
     }
 
-
     public function destroy($id)
     {
         // Find the task by ID. If not found, it will automatically return a 404 error.
@@ -101,10 +99,10 @@ class TaskController extends Controller
         // Return a response with status 204 (No Content), indicating that the task was deleted successfully
         // and no additional content is returned.
         return response()->json([
-            'message' => 'Task deleted successfully'
+            'message' => 'Task deleted successfully',
         ], 204);
     }
-   
+
     public function update(Request $request, $id)
     {
         // Validate the incoming data
@@ -137,5 +135,4 @@ class TaskController extends Controller
      * and deletion. It follows RESTful principles and uses appropriate HTTP status codes to ensure
      * clear communication with the API.
      */
-
 }
