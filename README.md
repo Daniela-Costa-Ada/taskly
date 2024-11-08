@@ -1,80 +1,80 @@
 ```markdown
 # To-Do List API
 
-Esta é uma aplicação Laravel integrada ao React que funciona como uma API RESTful para gerenciar uma lista de tarefas (to-do list). A API permite criar e listar tarefas com filtros.
+This is a Laravel application integrated with React that functions as a RESTful API to manage a to-do list. The API allows creating and listing tasks with filters.
 
-## Requisitos
+## Requirements
 
 - PHP >= 8.0
 - Composer
-- Banco de Dados (MySQL, PostgreSQL, etc.)
+- Database (MySQL, PostgreSQL, etc.)
 - Laravel
 - React
 
-## Instalação
+## Installation
 
-1. Clone o repositório e acesse o diretório do projeto:
+1. Clone the repository and navigate to the project directory:
    ```bash
    git clone git@github.com:Daniela-Costa-Ada/Aiogroup.git
-   cd seu-repositorio
+   cd your-repository
    ```
 
-2. Instale as dependências do Laravel:
+2. Install Laravel dependencies:
    ```bash
    composer install
    ```
 
-3. Configure o arquivo `.env`:
-   - Crie uma cópia do arquivo `.env.example`:
+3. Configure the `.env` file:
+   - Create a copy of the `.env.example` file:
      ```bash
      cp .env.example .env
      ```
-   - Configure os detalhes do banco de dados no arquivo `.env`:
+   - Set up the database details in the `.env` file:
      ```plaintext
      DB_CONNECTION=mysql
      DB_HOST=127.0.0.1
      DB_PORT=3306
      DB_DATABASE=todo_list
-     DB_USERNAME=seu_usuario
-     DB_PASSWORD=sua_senha
+     DB_USERNAME=your_username
+     DB_PASSWORD=your_password
      ```
 
-4. Gere a chave da aplicação:
+4. Generate the application key:
    ```bash
    php artisan key:generate
    ```
 
-5. Execute as migrações para criar as tabelas no banco de dados:
+5. Run migrations to create database tables:
    ```bash
    php artisan migrate
    ```
 
-6. Inicie o servidor:
+6. Start the server:
    ```bash
    php artisan serve
    ```
 
-## Endpoints da API
+## API Endpoints
 
-### 1. Criar Tarefa
+### 1. Create Task
 
-- **Descrição:** Cria uma nova tarefa na lista.
-- **Método:** `POST`
+- **Description:** Creates a new task in the list.
+- **Method:** `POST`
 - **Endpoint:** `/api/tasks`
-- **Exemplo de Requisição:**
+- **Request Example:**
   ```json
   {
-      "title": "Nova Tarefa",
-      "description": "Descrição da tarefa"
+      "title": "New Task",
+      "description": "Task description"
   }
   ```
-- **Resposta de Sucesso:** `201 Created`
+- **Success Response:** `201 Created`
   ```json
   {
       "task": {
           "id": 1,
-          "title": "Nova Tarefa",
-          "description": "Descrição da tarefa",
+          "title": "New Task",
+          "description": "Task description",
           "is_completed": false,
           "created_at": "2024-11-06T10:00:00.000000Z",
           "updated_at": "2024-11-06T10:00:00.000000Z"
@@ -82,33 +82,33 @@ Esta é uma aplicação Laravel integrada ao React que funciona como uma API RES
   }
   ```
 
-### 2. Listar Tarefas
+### 2. List Tasks
 
-- **Descrição:** Lista todas as tarefas, com filtro opcional por status (completa/não completa).
-- **Método:** `GET`
+- **Description:** Lists all tasks, with an optional status filter (completed/not completed).
+- **Method:** `GET`
 - **Endpoint:** `/api/tasks`
-- **Parâmetro de Filtro:** `is_completed` (opcional)
-  - `true` para listar apenas tarefas completas
-  - `false` para listar apenas tarefas não completas
+- **Filter Parameter:** `is_completed` (optional)
+  - `true` to list only completed tasks
+  - `false` to list only incomplete tasks
 
-- **Exemplo de Requisição Sem Filtro:**
+- **Request Example Without Filter:**
   ```http
   GET /api/tasks
   ```
   
-- **Exemplo de Requisição com Filtro (Tarefas Completas):**
+- **Request Example With Filter (Completed Tasks):**
   ```http
   GET /api/tasks?is_completed=true
   ```
 
-- **Resposta de Sucesso:**
+- **Success Response:**
   ```json
   {
       "tasks": [
           {
               "id": 1,
-              "title": "Tarefa Exemplo",
-              "description": "Descrição da tarefa",
+              "title": "Example Task",
+              "description": "Task description",
               "is_completed": true,
               "created_at": "2024-11-06T10:00:00.000000Z",
               "updated_at": "2024-11-06T10:00:00.000000Z"
@@ -117,11 +117,15 @@ Esta é uma aplicação Laravel integrada ao React que funciona como uma API RES
   }
   ```
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- [Laravel](https://laravel.com/) - Framework PHP para desenvolvimento web
+- ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) - PHP framework for web development
+- ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) - JavaScript library for building user interfaces
+- ![Composer](https://img.shields.io/badge/Composer-885630?style=for-the-badge&logo=composer&logoColor=white) - Dependency manager for PHP
+- ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) or ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white) - Database
+- ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) - Backend programming language
 
-## Licença
+## License
 
-Este projeto está licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 ```
