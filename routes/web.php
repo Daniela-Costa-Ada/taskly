@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Page\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GitHubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/todolist', [PageController::class, 'todolist'])->name('todolist');
+
+Route::get('/github/repos/{username}', [GitHubController::class, 'getUserRepos']);

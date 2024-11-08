@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
+import GitHubSearch from './GitHubSearch'; 
 
 const App = () => {
     const [tasks, setTasks] = React.useState([]);
@@ -11,10 +12,10 @@ const App = () => {
     };
 
     return (
-        <div>
-            <h1>To-Do List</h1>
+        <div>           
             <TaskForm onTaskCreated={handleTaskCreated} />
             <TaskList tasks={tasks} />
+            <GitHubSearch />
         </div>
     );
 };
