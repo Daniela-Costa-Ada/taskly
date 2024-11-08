@@ -1,5 +1,3 @@
-Aqui está o **README atualizado**, com todas as configurações de front-end, funcionalidades, e detalhes sobre o processo de desenvolvimento que foram realizados até agora:
-
 ```markdown
 # To-Do List API
 
