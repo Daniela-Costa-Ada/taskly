@@ -104,6 +104,31 @@ class TaskController extends Controller
             'message' => 'Task deleted successfully'
         ], 204);
     }
+   
+    public function update(Request $request, $id)
+    {
+        // Validate the incoming data
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        // Find the task by ID or return a 404 error if not found
+        $task = Task::findOrFail($id);
+
+        // Update the task's title and description with the validated data
+        $task->title = $validated['title'];
+        $task->description = $validated['description'];
+
+        // Save the updated task to the database
+        if ($task->save()) {
+            // Return the updated task and a 200 OK status if successful
+            return response()->json(['task' => $task], 200);
+        }
+
+        // Return a 500 Internal Server Error if the task could not be saved
+        return response()->json(['error' => 'Failed to update task'], 500);
+    }
 
     /**
      * TaskController

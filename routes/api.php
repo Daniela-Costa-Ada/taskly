@@ -23,5 +23,6 @@ Route::prefix('tasks')->group(function () {
     Route::post('/', [TaskController::class, 'store']); 
     Route::get('/', [TaskController::class, 'index']); 
     Route::patch('{id}/status', [TaskController::class, 'updateStatus']); 
+    Route::put('{id}', [TaskController::class, 'update']);
     Route::delete('{id}', [TaskController::class, 'destroy']);
 });

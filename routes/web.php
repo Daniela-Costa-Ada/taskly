@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Page\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GitHubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/todolist', [PageController::class, 'todolist'])->name('todolist');
