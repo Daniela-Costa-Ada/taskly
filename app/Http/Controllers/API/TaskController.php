@@ -23,4 +23,20 @@ class TaskController extends Controller
 
         return response()->json(['task' => $task], 201);
     }
+
+    public function index(Request $request)
+    {
+
+        $query = Task::query();
+
+        if ($request->has('is_completed')) {
+            $query->where('is_completed', $request->is_completed);
+        }
+
+
+        $tasks = $query->get();
+
+        return response()->json(['tasks' => $tasks]);
+    }
+
 }
