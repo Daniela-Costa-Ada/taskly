@@ -11,7 +11,6 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <div class="form">   
         {{-- <x-contact-information /> --}}
-        <h1>To-Do List</h1>
         <div id="app"></div>
         <script src="{{ mix('js/app.js') }}"></script>
     </div>

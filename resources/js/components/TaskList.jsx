@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { FaEdit, FaTrashAlt, FaCheck, FaRegCircle } from 'react-icons/fa';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import TaskForm from './TaskForm';
 
-// TaskList component displays and manages the list of tasks
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,12 +11,10 @@ const TaskList = () => {
   const [editTitle, setEditTitle] = useState('');
   const [editDescription, setEditDescription] = useState('');
 
-  // Fetch tasks from the API when the component mounts
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  // Function to fetch tasks from the server
   const fetchTasks = async () => {
     setLoading(true);
     setError(null);
@@ -22,8 +22,6 @@ const TaskList = () => {
       const response = await fetch('/api/tasks');
       if (!response.ok) throw new Error('Failed to fetch tasks');
       const data = await response.json();
-
-      // Sort tasks with incomplete ones first
       const sortedTasks = data.tasks.sort((a, b) => a.is_completed - b.is_completed);
       setTasks(sortedTasks);
     } catch (error) {
@@ -33,7 +31,10 @@ const TaskList = () => {
     }
   };
 
-  // Function to update the status of a specific task
+  const addTask = (newTask) => {
+    setTasks((prevTasks) => [...prevTasks, newTask].sort((a, b) => a.is_completed - b.is_completed));
+  };
+
   const toggleTaskStatus = async (taskId, currentStatus) => {
     try {
       const response = await fetch(`/api/tasks/${taskId}/status`, {
@@ -43,7 +44,6 @@ const TaskList = () => {
       });
       if (!response.ok) throw new Error('Failed to update task status');
 
-      // Update the task status locally and re-sort tasks
       const updatedTasks = tasks.map(task =>
         task.id === taskId ? { ...task, is_completed: !currentStatus } : task
       ).sort((a, b) => a.is_completed - b.is_completed);
@@ -54,15 +54,11 @@ const TaskList = () => {
     }
   };
 
-  // Function to delete a task by its ID
   const deleteTask = async (taskId) => {
     try {
-      const response = await fetch(`/api/tasks/${taskId}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(`/api/tasks/${taskId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Failed to delete task');
 
-      // Remove the task from the list locally
       const updatedTasks = tasks.filter(task => task.id !== taskId);
       setTasks(updatedTasks);
     } catch (error) {
@@ -70,57 +66,43 @@ const TaskList = () => {
     }
   };
 
-  // Function to enable editing mode for a task
   const startEditingTask = (task) => {
     setEditingTask(task.id);
     setEditTitle(task.title);
     setEditDescription(task.description);
   };
 
-  // Function to update the task with new title and description
   const updateTask = async () => {
     try {
       const response = await fetch(`/api/tasks/${editingTask}`, {
-        method: 'PUT',  // Usando PUT para a atualização
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: editTitle,
-          description: editDescription
-        }),
+        body: JSON.stringify({ title: editTitle, description: editDescription }),
       });
+      if (!response.ok) throw new Error('Failed to update task');
 
-      if (!response.ok) {
-        const errorMessage = await response.text();
-        console.error('Failed to update task:', errorMessage);
-        throw new Error('Failed to update task');
-      }
-
-      const updatedTask = await response.json();  // Aguarda o retorno da tarefa atualizada
-
-      // Atualiza a lista de tarefas com a tarefa editada
+      const updatedTask = await response.json();
       const updatedTasks = tasks.map(task =>
         task.id === editingTask ? updatedTask.task : task
       );
 
       setTasks(updatedTasks);
-      setEditingTask(null);  // Limpa o estado de edição
+      setEditingTask(null);
     } catch (error) {
       setError('Failed to update task');
-      console.error(error);
     }
   };
 
-
-  // Render loading message, error message, or task list
   if (loading) return <div>Loading tasks...</div>;
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <h1>Task List</h1>
-      <ul>
+    <div className="container">
+      <h1 className="my-4">Task List</h1>
+      <TaskForm addTask={addTask} /> {/* Passa a função addTask como prop */}
+      <ul className="list-group">
         {tasks.map(task => (
-          <li key={task.id} style={{ marginBottom: '10px' }}>
+          <li key={task.id} className="list-group-item d-flex justify-content-between align-items-center">
             {editingTask === task.id ? (
               <div>
                 <input
@@ -128,40 +110,46 @@ const TaskList = () => {
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
                   placeholder="Edit title"
+                  className="form-control mb-2"
                 />
-                <input
-                  type="text"
+                <textarea
                   value={editDescription}
                   onChange={(e) => setEditDescription(e.target.value)}
                   placeholder="Edit description"
+                  className="form-control mb-2"
                 />
-                <button onClick={updateTask}>Save</button>
-                <button onClick={() => setEditingTask(null)}>Cancel</button>
+                <button className="btn btn-success" onClick={updateTask}>Save</button>
+                <button className="btn btn-secondary ms-2" onClick={() => setEditingTask(null)}>Cancel</button>
               </div>
             ) : (
-              <div>
-                <span>{task.title}</span>
-                <span style={{ marginLeft: '10px' }}>
-                  {task.is_completed ? 'Completed' : 'Incomplete'}
-                </span>
-                <button
-                  style={{ marginLeft: '10px' }}
-                  onClick={() => toggleTaskStatus(task.id, task.is_completed)}
-                >
-                  Mark as {task.is_completed ? 'Incomplete' : 'Completed'}
-                </button>
-                <button
-                  style={{ marginLeft: '10px', color: 'blue' }}
-                  onClick={() => startEditingTask(task)}
-                >
-                  Edit
-                </button>
-                <button
-                  style={{ marginLeft: '10px', color: 'red' }}
-                  onClick={() => deleteTask(task.id)}
-                >
-                  Delete
-                </button>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5>{task.title}</h5>
+                  <p>{task.description}</p>
+                  <span className={`badge ${task.is_completed ? 'bg-success' : 'bg-warning'}`}>
+                    {task.is_completed ? 'Completed' : 'Incomplete'}
+                  </span>
+                </div>
+                <div>
+                  <button
+                    className="btn btn-outline-primary me-2"
+                    onClick={() => toggleTaskStatus(task.id, task.is_completed)}
+                  >
+                    {task.is_completed ? <FaRegCircle /> : <FaCheck />}
+                  </button>
+                  <button
+                    className="btn btn-outline-secondary me-2"
+                    onClick={() => startEditingTask(task)}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    className="btn btn-outline-danger"
+                    onClick={() => deleteTask(task.id)}
+                  >
+                    <FaTrashAlt />
+                  </button>
+                </div>
               </div>
             )}
           </li>
