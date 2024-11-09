@@ -24,7 +24,7 @@ function GitHubSearch() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4">Buscar Repositórios do GitHub</h1>
+      <h1 className="text-center mb-4">Search Repos GitHub User</h1>
       <div className="input-group mb-4">
         <input
           type="text"
