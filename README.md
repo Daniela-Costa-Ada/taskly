@@ -245,6 +245,7 @@ This is a Laravel application integrated with React that functions as a RESTful 
 
 - `TaskList`: Displays a list of tasks with buttons to mark as complete/incomplete or delete them.
 - `TaskForm`: A form to add new tasks to the list.
+<img src="public/images/imageresp.jpeg" alt="">
 
 ### Example of `app.js`:
 
