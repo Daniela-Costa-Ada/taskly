@@ -257,6 +257,71 @@ ReactDOM.render(
 );
 ```
 
+---
+
+## Task API Tests
+
+This set of tests ensures the proper functioning of the CRUD (Create, Read, Update, Delete) operations in the Task API. The tests are conducted using Laravel's testing framework (`TestCase`), and below are the descriptions of each implemented test.
+
+### Implemented Tests
+
+#### 1. **Tests Task Creation via API**
+   - **Objective:** Verify that task creation works correctly.
+   - **Flow:**
+     - Sends a `POST` request to the `/api/tasks` route with valid data.
+     - Verifies that the response status is `201 Created`.
+     - Confirms that the task data (title and description) is present in the JSON response.
+     - Validates that the task was correctly inserted into the database.
+   - **Method:** `test_task_creation_integration`
+
+#### 2. **Tests Task Update**
+   - **Objective:** Validate the behavior of the API when updating an existing task.
+   - **Flow:**
+     - Creates an initial task in the database.
+     - Sends a `PUT` request to the `/api/tasks/{id}` route with new data for the task.
+     - Verifies that the response status is `200 OK`.
+     - Validates that the response contains the updated task data.
+     - Confirms that the updated data was correctly saved in the database.
+   - **Method:** `test_task_update`
+
+#### 3. **Tests Task Creation Validation (Required Field)**
+   - **Objective:** Ensure that creating a task without the required fields results in the appropriate error.
+   - **Flow:**
+     - Sends a `POST` request to the `/api/tasks` route without the required fields (in this case, the task title).
+     - Verifies that the response status is `422 Unprocessable Entity`.
+     - Validates that the validation error for the `title` field is returned.
+   - **Method:** `test_task_creation_validation`
+
+#### 4. **Tests Task Listing After Creation**
+   - **Objective:** Verify that the task list is returned correctly after a new task is created.
+   - **Flow:**
+     - Creates a new task via the API.
+     - Sends a `GET` request to the `/api/tasks` route to list all tasks.
+     - Verifies that the response status is `200 OK`.
+     - Confirms that the newly created task is present in the returned list.
+     - Verifies that the task was correctly saved in the database.
+   - **Method:** `test_task_list_after_creation`
+
+---
+
+### Running the Tests
+
+To run the tests in your local environment, follow these steps:
+
+1. **Install the project dependencies**:
+   ```
+   composer install
+   ```
+
+2. **Configure the test environment**:
+   Ensure that the `.env.testing` file is properly configured for the testing environment.
+
+3. **Run the tests**:
+   To run all tests, execute the following command in the terminal:
+   ```
+   php artisan test
+   ```
+
 ### Technologies Used
 
 - ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white) - PHP framework for web development
