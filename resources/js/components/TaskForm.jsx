@@ -1,48 +1,48 @@
-import React, { useState } from 'react';
+// TaskForm is the component for creating and editing tasks
+import React, { useState, useEffect } from 'react';
 
-const TaskForm = ({ addTask }) => {
+const TaskForm = ({ taskToEdit, onSave, onCancel }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('/api/tasks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, description }),
-      });
-      if (!response.ok) throw new Error('Failed to create task');
-
-      const newTask = await response.json();
-      addTask(newTask.task); // Adiciona a nova tarefa à lista de tarefas
-      setTitle('');
-      setDescription('');
-    } catch (error) {
-      console.error('Failed to create task:', error);
+  useEffect(() => {
+    if (taskToEdit) {
+      setTitle(taskToEdit.title);
+      setDescription(taskToEdit.description);
     }
+  }, [taskToEdit]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave({ title, description });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
+        <label className="form-label">Title</label>
         <input
           type="text"
           className="form-control"
-          placeholder="Task title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         />
       </div>
       <div className="mb-3">
+        <label className="form-label">Description</label>
         <textarea
           className="form-control"
-          placeholder="Task description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
+          required
+        />
       </div>
-      <button type="submit" className="btn btn-primary">Add Task</button>
+      <button type="submit" className="btn btn-success">
+        {taskToEdit ? 'Save Changes' : 'Add Task'}
+      </button>
+      <button type="button" className="btn btn-secondary ms-2" onClick={onCancel}>
+        Cancel
+      </button>
     </form>
   );
 };

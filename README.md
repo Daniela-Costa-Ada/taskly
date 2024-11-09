@@ -1,27 +1,20 @@
-```markdown
-# To-Do List API
+# **To-Do List API**
 
-This is a Laravel application integrated with React that functions as a RESTful API to manage a to-do list. The API allows creating, listing, updating, and deleting tasks, with support for filtering tasks based on their completion status using `0` (incomplete) and `1` (completed).
+This Laravel application, integrated with React, functions as a RESTful API to manage a to-do list. It provides features to create, list, update, and delete tasks, with the option to filter tasks by completion status, using `0` for incomplete and `1` for completed tasks.
 
-## Requirements
+## **Requirements**
 
-- PHP >= 8.0
+- PHP version 8.0 or higher
 - Composer
-- Database (MySQL)
-- Laravel
-- React
-- Apache Web Server
-- Linux (for development environment)
+- MySQL database
+- Laravel framework
+- React library
+- Apache web server
+- Linux for development environment
 
-## Installation
+## **Installation**
 
-### Backend Setup (Laravel)
-
-1. Clone the repository and navigate to the project directory:
-   ```bash
-   git clone git@github.com:Daniela-Costa-Ada/Aiogroup.git
-   cd your-repository
-   ```
+### **Backend Setup (Laravel)**
 
 2. Install Laravel dependencies:
    ```bash
@@ -138,7 +131,7 @@ This is a Laravel application integrated with React that functions as a RESTful 
           "id": 1,
           "title": "New Task",
           "description": "Task description",
-          "is_completed": 0,
+          "is_completed": 1,
           "created_at": "2024-11-06T10:00:00.000000Z",
           "updated_at": "2024-11-06T10:00:00.000000Z"
       }

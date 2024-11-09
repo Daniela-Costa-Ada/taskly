@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function GitHubSearch() {
   const [username, setUsername] = useState('');
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     if (!username) return;
-
+    setLoading(true);
     try {
       const response = await axios.get(`/github/repos/${username}`);
       setRepos(response.data);
@@ -17,32 +19,38 @@ function GitHubSearch() {
       setError('Usuário não encontrado ou erro ao buscar os dados.');
       setRepos([]);
     }
+    setLoading(false);
   };
 
   return (
-    <div>
-      <h1>Buscar Repositórios do GitHub</h1>
-      <input
-        type="text"
-        placeholder="Digite o nome de usuário"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button onClick={handleSearch}>Buscar</button>
+    <div className="container my-5">
+      <h1 className="text-center mb-4">Buscar Repositórios do GitHub</h1>
+      <div className="input-group mb-4">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Digite o nome de usuário"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button className="btn btn-primary" onClick={handleSearch}>Buscar</button>
+      </div>
 
-      {error && <p>{error}</p>}
+      {error && <div className="alert alert-danger">{error}</div>}
 
-      <ul>
+      {loading && <p className="text-center">Carregando...</p>}
+
+      <ul className="list-group">
         {repos.length > 0 ? (
           repos.map((repo) => (
-            <li key={repo.id}>
-              <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
+            <li key={repo.id} className="list-group-item">
+              <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-decoration-none text-primary">
                 {repo.name}
               </a>
             </li>
           ))
         ) : (
-          <p>Sem repositórios para exibir.</p>
+          !loading && <p className="text-center">Sem repositórios para exibir.</p>
         )}
       </ul>
     </div>
