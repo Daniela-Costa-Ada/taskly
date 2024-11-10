@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt, FaCheck, FaRegCircle, FaPlus } from 'react-icons/fa'; // Icons for task actions
+import { FaEdit, FaTrashAlt, FaCheck, FaRegCircle, FaPlus } from 'react-icons/fa'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TaskForm from './TaskForm'; // Importing the task form for editing and creation
+import TaskForm from './TaskForm'; 
 
 // Main component for the task list
 const TaskList = () => {
@@ -15,7 +15,7 @@ const TaskList = () => {
   // Effect to load tasks when the component is mounted
   useEffect(() => {
     fetchTasks();
-  }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+  }, []); 
 
   // Function to fetch tasks from the API
   const fetchTasks = async () => {
@@ -123,7 +123,7 @@ const TaskList = () => {
       <h1 className="text-center mb-4 my-4">To Do List</h1>
       {!showForm && (
         <button
-          className="btn btn-outline-primary ms-2 mb-3" // Adiciona margem abaixo para separar da lista de tarefas
+          className="btn btn-outline-primary ms-2 mb-3" 
           onClick={() => setShowForm(true)}
         >
           <FaPlus /> New Task
