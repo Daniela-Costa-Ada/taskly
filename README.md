@@ -337,7 +337,15 @@ To run the tests in your local environment, follow these steps:
 - ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) - Backend programming language
 - ![Apache](https://img.shields.io/badge/Apache-FF0000?style=for-the-badge&logo=apache&logoColor=white) - Web server
 - ![Linux](https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=white) - Development environment
+Here’s a suggestion for your final note in the README:
 
+---
+
+### Final Consideration
+
+This project was developed using Laravel and React to manage a task list. Although I intended to create additional components to enhance the task list, I ran out of time. Despite this, the current implementation provides a solid foundation for managing tasks efficiently. I look forward to expanding the project in the future with more features and improvements.
+
+---
 ## License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
