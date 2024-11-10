@@ -3,7 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function GitHubSearch() {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('Daniela-Costa-Ada');
   const [repos, setRepos] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,6 +22,12 @@ function GitHubSearch() {
     setLoading(false);
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="container my-5">
       <h1 className="text-center mb-4">Search Repos GitHub User</h1>
@@ -32,6 +38,7 @@ function GitHubSearch() {
           placeholder="Digite o nome de usuário"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
         <button className="btn btn-primary" onClick={handleSearch}>Buscar</button>
       </div>
