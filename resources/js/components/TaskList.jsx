@@ -76,7 +76,7 @@ const TaskList = () => {
   // Function to save a task (new or edited)
   const saveTask = async (task) => {
     try {
-      const method = editingTask ? 'PUT' : 'POST'; // Use PUT for editing, POST for new task
+      const method = editingTask ? 'PUT' : 'POST';
       const url = editingTask
         ? `/api/tasks/${editingTask.id}`
         : '/api/tasks';
@@ -101,8 +101,8 @@ const TaskList = () => {
         setTasks((prevTasks) => [newTask.task, ...prevTasks]);
       }
 
-      setShowForm(false); // Hide the form after saving
-      setEditingTask(null); // Clear the editing task state
+      setShowForm(false);
+      setEditingTask(null);
     } catch (error) {
       setError('Failed to save task');
     }
@@ -142,24 +142,18 @@ const TaskList = () => {
                 </span>
               </div>
               <div className="d-flex align-items-center justify-content-start">
-               
-                {/* Button to toggle task status */}
                 <button
                   className="btn btn-outline-primary ms-2"
                   onClick={() => toggleTaskStatus(task.id, task.is_completed)}
                 >
                   {task.is_completed ? <FaRegCircle /> : <FaCheck />}
                 </button>
-
-                {/* Button to edit task */}
                 <button
                   className="btn btn-outline-secondary ms-2"
                   onClick={() => startEditingTask(task)}
                 >
                   <FaEdit />
-                </button>
-
-                {/* Button to delete task */}
+                </button>              
                 <button
                   className="btn btn-outline-danger ms-2"
                   onClick={() => deleteTask(task.id)}
@@ -176,9 +170,9 @@ const TaskList = () => {
       {/* Show task form if showForm is true */}
       {showForm && (
         <TaskForm
-          taskToEdit={editingTask} // Pass the task being edited to the form
-          onSave={saveTask} // Save task function
-          onCancel={cancelEdit} // Cancel edit function
+          taskToEdit={editingTask} 
+          onSave={saveTask} 
+          onCancel={cancelEdit} 
         />
       )}
     </div>

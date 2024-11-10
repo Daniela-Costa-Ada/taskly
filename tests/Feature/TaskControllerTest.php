@@ -2,14 +2,19 @@
 
 namespace Tests\Feature;
 
-use App\Models\Task; // Importing the Task model to interact with the tasks table for tests
-use Tests\TestCase; // Importing the TestCase class to extend for writing feature tests
+use App\Models\Task;
+// use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+// use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TaskControllerTest extends TestCase
 {
     /**
      * Tests the creation of a task via the API.
      */
+    // use RefreshDatabase;
+    // use DatabaseTransactions;
     public function test_task_creation_integration()
     {
         // Defining the task data to be sent with the POST request
@@ -57,7 +62,7 @@ class TaskControllerTest extends TestCase
         ];
 
         // Sending a PUT request to update the task data in the API
-        $response = $this->putJson('/api/tasks/' . $task->id, $updatedData);
+        $response = $this->putJson('/api/tasks/'.$task->id, $updatedData);
 
         // Asserting that the response status code is 200 (OK)
         $response->assertStatus(200);

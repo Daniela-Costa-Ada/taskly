@@ -2,6 +2,9 @@
 
 This Laravel application, integrated with React, functions as a RESTful API to manage a to-do list. It provides features to create, list, update, and delete tasks, with the option to filter tasks by completion status, using `0` for incomplete and `1` for completed tasks.
 
+Main Project Page
+The main page of the project is /todolist, where users can view the list of tasks, add new tasks, and interact with existing ones (mark as complete, edit, or delete) and choose the repos by user.
+
 ## **Requirements**
 
 - PHP version 8.0 or higher
@@ -52,6 +55,9 @@ This Laravel application, integrated with React, functions as a RESTful API to m
    ```
 
 ### Frontend Setup (React)
+Install React (if not already installed) in your resources/js folder:
+
+npm install react react-dom axios
 
 1. Navigate to the `resources/js` directory:
    ```bash
