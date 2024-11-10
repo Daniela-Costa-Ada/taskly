@@ -6,6 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
+/**
+ * TaskController
+ *
+ * This controller manages all task operations, including creation, listing, status update,
+ * and deletion. It follows RESTful principles and uses appropriate HTTP status codes to ensure
+ * clear communication with the API.
+ */
 class TaskController extends Controller
 {
     public function store(Request $request)
@@ -127,12 +134,4 @@ class TaskController extends Controller
         // Return a 500 Internal Server Error if the task could not be saved
         return response()->json(['error' => 'Failed to update task'], 500);
     }
-
-    /**
-     * TaskController
-     *
-     * This controller manages all task operations, including creation, listing, status update,
-     * and deletion. It follows RESTful principles and uses appropriate HTTP status codes to ensure
-     * clear communication with the API.
-     */
 }
