@@ -93,7 +93,7 @@ npm install react react-dom axios
 - Ensure that `package.json` has the necessary dependencies for React, including Babel for transpiling JSX:
   ```json
   {
-    "name": "aiogroup",
+    "name": "taskly",
     "version": "1.0.0",
     "private": true,
     "scripts": {
