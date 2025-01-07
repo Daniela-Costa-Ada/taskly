@@ -120,7 +120,7 @@ const TaskList = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center mb-4 my-4">To Do List</h1>
+      <h1 className="text-center mb-4 my-4">ToDo</h1>
       {!showForm && (
         <button
           className="btn btn-outline-primary ms-2 mb-3" 
