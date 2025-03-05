@@ -337,7 +337,6 @@ To run the tests in your local environment, follow these steps:
 - ![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white) - Backend programming language
 - ![Apache](https://img.shields.io/badge/Apache-FF0000?style=for-the-badge&logo=apache&logoColor=white) - Web server
 - ![Linux](https://img.shields.io/badge/Linux-000000?style=for-the-badge&logo=linux&logoColor=white) - Development environment
-Here’s a suggestion for your final note in the README:
 
 ---
 
